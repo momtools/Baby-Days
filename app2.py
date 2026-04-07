@@ -69,12 +69,12 @@ st.markdown("""
 
 /* 右下の「Made with Streamlit」とGitHubアイコンを非表示にする */
 footer {
-    visibility: hidden;
+    display: none !important;
 }
 
 /* ついでに右上のメニューボタンなども完全に消してスッキリさせる */
 header {
-    visibility: hidden;
+    display: none !important;
 }
 
 /* 折りたたみメニューの文字色調整 */
