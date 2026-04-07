@@ -105,7 +105,7 @@ iframe {
     display: none !important;
 }
 
-/* フッター完全抑制（保険） */
+/* フッター完全抑制*/
 footer {
     visibility: hidden !important;
     height: 0px !important;
