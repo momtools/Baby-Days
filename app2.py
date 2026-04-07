@@ -82,6 +82,40 @@ header {
     color: #555555 !important;
     background-color: transparent !important;
 }
+
+st.markdown("""
+<style>
+
+/* Streamlit Cloudの右下フローティングアイコンを消す */
+[data-testid="stToolbar"] {
+    display: none !important;
+}
+
+[data-testid="stDecoration"] {
+    display: none !important;
+}
+
+/* 右下の「Deploy」「GitHub」系のボタンを強制非表示 */
+div[data-testid="stStatusWidget"] {
+    display: none !important;
+}
+
+/* 念のためiframe系も消す */
+iframe {
+    display: none !important;
+}
+
+/* フッター完全抑制（保険） */
+footer {
+    visibility: hidden !important;
+    height: 0px !important;
+}
+
+/* Streamlitのクレジット表記を消す（PC用保険） */
+.css-164nlkn {
+    display: none !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
