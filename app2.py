@@ -95,7 +95,7 @@ st.markdown("""
     display: none !important;
 }
 
-/* 右下の「Deploy」「GitHub」系のボタンを強制非表示 */
+/* 右下のDeployGitHub系のボタンを強制非表示 */
 div[data-testid="stStatusWidget"] {
     display: none !important;
 }
