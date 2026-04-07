@@ -5,36 +5,39 @@ from dateutil.relativedelta import relativedelta
 # --- ページ設定（タイトルの横にアイコンを出すなど） ---
 st.set_page_config(page_title="Baby Days - 記念日リスト", layout="centered")
 
-# --- 【最重要】ダークモードを強制解除して白背景にする魔法 ---
 st.markdown("""
 <style>
-/* アプリ全体の背景を強制的に明るいグレーにする */
+
+/* アプリ全体 */
 .stApp {
     background-color: #F8F9FA !important;
 }
 
-/* 文字色をすべて濃いグレーに固定する（白文字化を防止） */
+/* 文字色 */
 .stApp p, .stApp span, .stApp h1, .stApp div, .stApp label, .stApp .stMarkdown {
     color: #333333 !important;
 }
 
-/* 入力フォームのラベルなども強制的に色固定 */
 .stApp [data-testid="stMarkdownContainer"] p {
     color: #333333 !important;
 }
 
-/* 右上の「･･･」メニューを非表示 */
+/* ヘッダー非表示 */
 [data-testid="stHeader"] {
     display: none;
 }
 
-/* 余白の調整 */
+header {
+    display: none !important;
+}
+
+/* 余白 */
 .block-container {
     padding-top: 2rem !important;
     padding-bottom: 4rem !important;
 }
 
-/* カードのデザイン（ここも背景を白に固定） */
+/* カード */
 .card {
     background-color: #ffffff !important;
     padding: 20px 25px;
@@ -44,6 +47,7 @@ st.markdown("""
     margin-bottom: 40px; 
 }
 
+/* タイトル */
 .title {
     font-size: 20px;
     text-align: center;
@@ -54,12 +58,12 @@ st.markdown("""
     color: #333333 !important;
 }
 
+/* イベント */
 .event {
     display: flex;
     justify-content: space-between;
     padding: 10px 0; 
     font-size: 14px;
-    border-bottom: none;
 }
 
 .event span:last-child {
@@ -67,26 +71,15 @@ st.markdown("""
     color: #555555 !important;
 }
 
-/* 右下の「Made with Streamlit」とGitHubアイコンを非表示にする */
-footer {
-    display: none !important;
-}
-
-/* ついでに右上のメニューボタンなども完全に消してスッキリさせる */
-header {
-    display: none !important;
-}
-
-/* 折りたたみメニューの文字色調整 */
+/* expander */
 .streamlit-expanderHeader {
     color: #555555 !important;
     background-color: transparent !important;
 }
 
-st.markdown("""
-<style>
+/* ===== ここからが今回の本命 ===== */
 
-/* Streamlit Cloudの右下フローティングアイコンを消す */
+/* 右下のUI消す */
 [data-testid="stToolbar"] {
     display: none !important;
 }
@@ -95,23 +88,17 @@ st.markdown("""
     display: none !important;
 }
 
-/* 右下のDeployGitHub系のボタンを強制非表示 */
 div[data-testid="stStatusWidget"] {
     display: none !important;
 }
 
-/* 念のためiframe系も消す */
-iframe {
-    display: none !important;
-}
-
-/* フッター完全抑制*/
+/* フッター完全抑制 */
 footer {
     visibility: hidden !important;
     height: 0px !important;
 }
 
-/* Streamlitのクレジット表記を消す（PC用保険） */
+/* クレジット */
 .css-164nlkn {
     display: none !important;
 }
