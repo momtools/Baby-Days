@@ -2,11 +2,82 @@ import streamlit as st
 from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
 
+# --- ページ設定（タイトルの横にアイコンを出すなど） ---
 st.set_page_config(page_title="Baby Days - 記念日リスト", layout="centered")
 
-# --- アプリのメインタイトル（Baby Daysをさらに大きく、サブタイトルとのバランスを調整） ---
-st.markdown("<h1 style='font-weight: bold; white-space: nowrap; font-size: 2.5rem;'>Baby Days <span style='font-size: 0.45em; font-weight: normal; color: #555;'>-記念日リスト-</span></h1>", unsafe_allow_html=True)
-st.write("誕生日を入力すると、小学校卒業までの記念日一覧が日付順で表示されます")
+# --- 【最重要】ダークモードを強制解除して白背景にする魔法 ---
+st.markdown("""
+<style>
+/* アプリ全体の背景を強制的に明るいグレーにする */
+.stApp {
+    background-color: #F8F9FA !important;
+}
+
+/* 文字色をすべて濃いグレーに固定する（白文字化を防止） */
+.stApp p, .stApp span, .stApp h1, .stApp div, .stApp label, .stApp .stMarkdown {
+    color: #333333 !important;
+}
+
+/* 入力フォームのラベルなども強制的に色固定 */
+.stApp [data-testid="stMarkdownContainer"] p {
+    color: #333333 !important;
+}
+
+/* 右上の「･･･」メニューを非表示 */
+[data-testid="stHeader"] {
+    display: none;
+}
+
+/* 余白の調整 */
+.block-container {
+    padding-top: 2rem !important;
+    padding-bottom: 4rem !important;
+}
+
+/* カードのデザイン（ここも背景を白に固定） */
+.card {
+    background-color: #ffffff !important;
+    padding: 20px 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    margin-top: 30px; 
+    margin-bottom: 40px; 
+}
+
+.title {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 5px;   
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #333333 !important;
+}
+
+.event {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0; 
+    font-size: 14px;
+    border-bottom: none;
+}
+
+.event span:last-child {
+    font-weight: bold;
+    color: #555555 !important;
+}
+
+/* 折りたたみメニューの文字色調整 */
+.streamlit-expanderHeader {
+    color: #555555 !important;
+    background-color: transparent !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- アプリのメインタイトル ---
+st.markdown("<h1 style='font-weight: bold; white-space: nowrap; font-size: 2.5rem; color: #333;'>Baby Days <span style='font-size: 0.45em; font-weight: normal; color: #555;'>-記念日リスト-</span></h1>", unsafe_allow_html=True)
+st.write("誕生日を入力すると、小学校卒業までの記念日一覧が表示されます")
 
 # --- 注意書き（折りたたみメニュー） ---
 with st.expander("記念日の計算方法"):
@@ -14,7 +85,7 @@ with st.expander("記念日の計算方法"):
     * **日数の数え方**: **生まれた日を1日目**として計算しています。
     * **お宮参り**: 男の子は生後31日目、女の子は生後32日目で計算しています。
     * **七五三**: 満年齢の11月15日で表示しています。一般的には男の子は5歳、女の子は3歳と7歳でお祝いしますが、地域や風習によって異なるため、本アプリでは3歳・5歳・7歳のすべてを表示しています。
-    * **お祝いする日について**: 実際の行事は、赤ちゃんの体調やご家族の都合に合わせてお祝いすることが多いです。あくまで目安としてご活用ください！
+    * **お祝いする日について**: 実際の行事は、赤ちゃんの体調やご家族の都合に合わせてお祝いすることが多いです。
     """)
 
 # --- 入力項目 ---
@@ -23,21 +94,15 @@ gender = st.radio("性別を選択してください", ["男の子", "女の子"
 birth = st.date_input("誕生日を入力")
 
 if birth:
-    # --- 日付計算 ---
-    # 1. お七夜 (生後7日目 → +6日)
+    # --- 日付計算ロジック ---
     oshichiya = birth + timedelta(days=6)
-    
-    # 2. お宮参り (男の子:31日目→+30日、女の子:32日目→+31日)
     omiyamairi_days = 30 if gender == "男の子" else 31
     omiyamairi = birth + timedelta(days=omiyamairi_days)
-    
-    # 3. 百日・1000日・ハーフ・1歳 (百日・1000日は「-1日」して計算)
     day100 = birth + timedelta(days=99)
     day1000 = birth + timedelta(days=999)
     half_birthday = birth + relativedelta(months=6)
     birthday1 = birth + relativedelta(years=1)
 
-    # --- イベントリストの作成 ---
     events = [
         {"name": "お七夜", "date": oshichiya},
         {"name": "お宮参り", "date": omiyamairi},
@@ -47,101 +112,44 @@ if birth:
         {"name": "1000日祝い", "date": day1000},
     ]
 
-    # 4. 初節句 (性別によって切り替え)
+    # 初節句
     if gender == "女の子":
         hina = date(birth.year, 3, 3)
-        if birth > hina:
-            hina = date(birth.year + 1, 3, 3)
+        if birth > hina: hina = date(birth.year + 1, 3, 3)
         events.append({"name": "初節句 (ひな祭り)", "date": hina})
     else:
         tango = date(birth.year, 5, 5)
-        if birth > tango:
-            tango = date(birth.year + 1, 5, 5)
+        if birth > tango: tango = date(birth.year + 1, 5, 5)
         events.append({"name": "初節句 (こどもの日)", "date": tango})
 
-    # 5. 七五三 (満年齢の11/15、地域差に配慮して3,5,7歳すべて表示)
+    # 七五三
     events.append({"name": "七五三（3歳）", "date": birth + relativedelta(years=3, month=11, day=15)})
     events.append({"name": "七五三（5歳）", "date": birth + relativedelta(years=5, month=11, day=15)})
     events.append({"name": "七五三（7歳）", "date": birth + relativedelta(years=7, month=11, day=15)})
 
-    # 6. 小学校入学・卒業（早生まれ判定）
+    # 小学校
     if (birth.month < 4) or (birth.month == 4 and birth.day == 1):
         school_entry_year = birth.year + 6
     else:
         school_entry_year = birth.year + 7
     
-    elem_entry_date = date(school_entry_year, 4, 1)
-    elem_grad_date = date(school_entry_year + 6, 3, 20)
+    events.append({"name": "小学校 入学", "date": date(school_entry_year, 4, 1), "display": f"{school_entry_year}.04"})
+    events.append({"name": "小学校 卒業", "date": date(school_entry_year + 6, 3, 20), "display": f"{school_entry_year + 6}.03"})
 
-    # ドット区切りに合わせる
-    events.append({"name": "小学校 入学式", "date": elem_entry_date, "display": f"{school_entry_year}.04"})
-    events.append({"name": "小学校 卒業式", "date": elem_grad_date, "display": f"{school_entry_year + 6}.03"})
-
-    # --- 並べ替えとHTML生成 ---
+    # --- 並べ替えと表示 ---
     events.sort(key=lambda x: x["date"])
 
     events_html = ""
     for ev in events:
-        # ドット区切りのフォーマットに変更
         display_date = ev.get("display", ev["date"].strftime('%Y.%m.%d'))
         events_html += f'<div class="event"><span>{ev["name"]}</span><span>{display_date}</span></div>\n'
 
-    # カード用タイトルの生成（ニックネームの有無で分岐）
-    card_title = f"{name}の記念日" if name else "記念日"
+    card_title = f"{name}の記念日リスト" if name else "記念日リスト"
 
-    # --- CSS ---
-    st.markdown("""
-<style>
-/* 右上の「･･･」メニューを含むヘッダー全体を非表示にする */
-[data-testid="stHeader"] {
-    display: none;
-}
-
-/* メニューが消えた分、上部の余白を少し詰めました */
-.block-container {
-    padding-top: 2rem !important;
-    padding-bottom: 4rem !important;
-}
-
-.card {
-    background-color: white;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    margin-top: 50px; 
-    margin-bottom: 40px; 
-    color: #333;
-}
-.title {
-    font-size: 20px;
-    text-align: center;
-    margin-top: 5px;   
-    margin-bottom: 25px; 
-    letter-spacing: 1px;
-    font-weight: bold;
-}
-.event {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0; 
-    font-size: 14px;
-}
-.event span:last-child {
-    font-weight: bold;
-    color: #555;
-}
-/* Expanderの見た目調整 */
-.streamlit-expanderHeader {
-    font-size: 14px;
-    color: #555;
-}
-</style>
-    """, unsafe_allow_html=True)
-
-    # --- 表示 ---
+    # --- HTML表示 ---
     st.markdown(f"""
-<div class="card">
-<div class="title">{card_title}</div>
-{events_html}
-</div>
+    <div class="card">
+        <div class="title">{card_title}</div>
+        {events_html}
+    </div>
     """, unsafe_allow_html=True)
