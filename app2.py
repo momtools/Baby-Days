@@ -67,6 +67,16 @@ st.markdown("""
     color: #555555 !important;
 }
 
+/* 右下の「Made with Streamlit」とGitHubアイコンを非表示にする */
+footer {
+    visibility: hidden;
+}
+
+/* ついでに右上のメニューボタンなども完全に消してスッキリさせる */
+header {
+    visibility: hidden;
+}
+
 /* 折りたたみメニューの文字色調整 */
 .streamlit-expanderHeader {
     color: #555555 !important;
