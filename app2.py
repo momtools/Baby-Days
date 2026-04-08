@@ -107,7 +107,7 @@ footer {
 /* ニックネーム（テキスト入力）と誕生日（日付入力）の枠と背景 */
 div[data-testid="stTextInput"] div[data-baseweb="input"],
 div[data-testid="stDateInput"] div[data-baseweb="input"] {
-    background-color: #FFF5F7 !important; /* 背景色（薄いピンク） */
+    background-color: #E4C1B5 !important; /* 背景色（薄いピンク） */
     border: 2px solid #FFD1DC !important; /* 枠線の色（少し濃いピンク） */
     border-radius: 10px !important; /* 角を少し丸くする */
 }
@@ -115,7 +115,7 @@ div[data-testid="stDateInput"] div[data-baseweb="input"] {
 /* 入力中の文字の色（見えやすいように濃いグレーに固定） */
 div[data-testid="stTextInput"] input,
 div[data-testid="stDateInput"] input {
-    color: #333333 !important;
+    color: #E4C1B5 !important;
 }
 
 /* フォーカス時（タップして入力している時）の枠線の色 */
