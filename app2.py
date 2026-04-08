@@ -10,7 +10,7 @@ st.markdown("""
 
 /* アプリ全体 */
 .stApp {
-    background-color: #EAE6E1 !important;
+    background-color: #FFFEF9 !important;
 }
 
 /* 文字色 */
