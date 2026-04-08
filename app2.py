@@ -2,33 +2,29 @@ import streamlit as st
 from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
 
-# --- ページ設定（タイトルの横にアイコンを出すなど） ---
+# --- ページ設定 ---
 st.set_page_config(page_title="Baby Days - 記念日リスト", layout="centered")
 
+# --- CSS（デザインの魔法） ---
 st.markdown("""
 <style>
-
 /* アプリ全体 */
 .stApp {
-    background-color: #FFFEF9 !important;
+    background-color: #F8F9FA !important;
 }
 
 /* 文字色 */
 .stApp p, .stApp span, .stApp h1, .stApp div, .stApp label, .stApp .stMarkdown {
-    color: #544C40 !important;
+    color: #333333 !important;
 }
-
 .stApp [data-testid="stMarkdownContainer"] p {
     color: #333333 !important;
 }
 
-/* ヘッダー非表示 */
-[data-testid="stHeader"] {
-    display: none;
-}
-
-header {
+/* ヘッダー・フッター・右下UIをすべて非表示 */
+[data-testid="stHeader"], header, footer, [data-testid="stToolbar"], [data-testid="stDecoration"], div[data-testid="stStatusWidget"], .css-164nlkn {
     display: none !important;
+    visibility: hidden !important;
 }
 
 /* 余白 */
@@ -55,7 +51,7 @@ header {
     margin-bottom: 30px;
     letter-spacing: 1px;
     font-weight: bold;
-    color: #544C40 !important;
+    color: #333333 !important;
 }
 
 /* イベント */
@@ -65,73 +61,45 @@ header {
     padding: 10px 0; 
     font-size: 14px;
 }
-
 .event span:last-child {
     font-weight: bold;
-    color: #544C40 !important;
+    color: #555555 !important;
 }
 
 /* expander */
 .streamlit-expanderHeader {
-    color: #544C40 !important;
+    color: #555555 !important;
     background-color: transparent !important;
 }
 
-/* ===== ここからが今回の本命 ===== */
-
-/* 右下のUI消す */
-[data-testid="stToolbar"] {
-    display: none !important;
-}
-
-[data-testid="stDecoration"] {
-    display: none !important;
-}
-
-div[data-testid="stStatusWidget"] {
-    display: none !important;
-}
-
-/* フッター完全抑制 */
-footer {
-    visibility: hidden !important;
-    height: 0px !important;
-}
-
-/* クレジット */
-.css-164nlkn {
-    display: none !important;
-}
-/* ===== 入力ボックスのデザイン変更（修正版） ===== */
-
-/* 枠線と背景（テキスト＆日付共通） */
+/* ===== 入力ボックスのデザイン変更（ピンク色） ===== */
 div[data-testid="stTextInput"] div[data-baseweb="base-input"],
 div[data-testid="stDateInput"] div[data-baseweb="base-input"] {
     background-color: #FFF5F7 !important; /* 背景色（薄いピンク） */
     border: 2px solid #FFD1DC !important; /* 枠線の色（少し濃いピンク） */
-    border-radius: 10px !important; /* 角を少し丸くする */
+    border-radius: 10px !important; /* 角を丸く */
 }
 
-/* 入力欄「そのもの」の背景を透明にして、上の背景色を透かせる */
+/* 入力欄「そのもの」の背景を透明にしてピンクを透かせる */
 div[data-testid="stTextInput"] input,
 div[data-testid="stDateInput"] input {
     background-color: transparent !important;
     color: #333333 !important;
 }
 
-/* フォーカス時（タップして入力している時）の枠線の色 */
+/* フォーカス時の枠線 */
 div[data-testid="stTextInput"] div[data-baseweb="base-input"]:focus-within,
 div[data-testid="stDateInput"] div[data-baseweb="base-input"]:focus-within {
-    border-color: #FFB6C1 !important; /* タップすると少し濃くなる */
+    border-color: #FFB6C1 !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # --- アプリのメインタイトル ---
-st.markdown("<h1 style='font-weight: bold; white-space: nowrap; font-size: 2.5rem; color: #544C40;'>Baby Days <span style='font-size: 0.45em; font-weight: normal; color: #555;'>-記念日リスト-</span></h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='font-weight: bold; white-space: nowrap; font-size: 2.5rem; color: #333;'>Baby Days <span style='font-size: 0.45em; font-weight: normal; color: #555;'>-記念日リスト-</span></h1>", unsafe_allow_html=True)
 st.write("誕生日を入力すると、小学校卒業までの記念日一覧が表示されます")
 
-# --- 注意書き（折りたたみメニュー） ---
+# --- 注意書き ---
 with st.expander("記念日の計算方法"):
     st.write("""
     * **日数の数え方**: **生まれた日を1日目**として計算しています。
@@ -146,7 +114,7 @@ gender = st.radio("性別を選択してください", ["男の子", "女の子"
 birth = st.date_input("誕生日を入力")
 
 if birth:
-    # --- 日付計算ロジック ---
+    # --- 日付計算 ---
     oshichiya = birth + timedelta(days=6)
     omiyamairi_days = 30 if gender == "男の子" else 31
     omiyamairi = birth + timedelta(days=omiyamairi_days)
@@ -198,7 +166,7 @@ if birth:
 
     card_title = f"{name}の記念日リスト" if name else "記念日リスト"
 
-# --- HTML表示 ---
+    # --- HTML表示 ---
     st.markdown(f"""
     <div class="card">
         <div class="title">{card_title}</div>
