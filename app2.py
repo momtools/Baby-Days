@@ -166,14 +166,14 @@ if birth:
 
     card_title = f"{name}の記念日リスト" if name else "記念日リスト"
 
-    # --- HTML表示 ---
+# --- HTML表示 ---
     st.markdown(f"""
-    <div class="card">
-        <div class="title">{card_title}</div>
-        {events_html}
-    </div>
-    
-    <div style="text-align: center; font-size: 11px; color: #999; margin-top: -20px; margin-bottom: 40px; letter-spacing: 0.5px; font-family: sans-serif;">
-        presented by mom's tools
-    </div>
-    """, unsafe_allow_html=True)
+<div class="card">
+<div class="title">{card_title}</div>
+{events_html}
+</div>
+
+<div style="text-align: center; font-size: 11px; color: #999; margin-top: -20px; margin-bottom: 40px; letter-spacing: 0.5px; font-family: sans-serif;">
+presented by mom's tools
+</div>
+""", unsafe_allow_html=True)
