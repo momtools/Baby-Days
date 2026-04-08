@@ -10,12 +10,12 @@ st.markdown("""
 
 /* アプリ全体 */
 .stApp {
-    background-color: #F8F9FA !important;
+    background-color: #EAE6E1 !important;
 }
 
 /* 文字色 */
 .stApp p, .stApp span, .stApp h1, .stApp div, .stApp label, .stApp .stMarkdown {
-    color: #333333 !important;
+    color: #544C40 !important;
 }
 
 .stApp [data-testid="stMarkdownContainer"] p {
@@ -55,7 +55,7 @@ header {
     margin-bottom: 30px;
     letter-spacing: 1px;
     font-weight: bold;
-    color: #333333 !important;
+    color: #544C40 !important;
 }
 
 /* イベント */
@@ -68,12 +68,12 @@ header {
 
 .event span:last-child {
     font-weight: bold;
-    color: #555555 !important;
+    color: #544C40 !important;
 }
 
 /* expander */
 .streamlit-expanderHeader {
-    color: #555555 !important;
+    color: #544C40 !important;
     background-color: transparent !important;
 }
 
@@ -107,7 +107,7 @@ footer {
 """, unsafe_allow_html=True)
 
 # --- アプリのメインタイトル ---
-st.markdown("<h1 style='font-weight: bold; white-space: nowrap; font-size: 2.5rem; color: #333;'>Baby Days <span style='font-size: 0.45em; font-weight: normal; color: #555;'>-記念日リスト-</span></h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='font-weight: bold; white-space: nowrap; font-size: 2.5rem; color: #544C40;'>Baby Days <span style='font-size: 0.45em; font-weight: normal; color: #555;'>-記念日リスト-</span></h1>", unsafe_allow_html=True)
 st.write("誕生日を入力すると、小学校卒業までの記念日一覧が表示されます")
 
 # --- 注意書き（折りたたみメニュー） ---
