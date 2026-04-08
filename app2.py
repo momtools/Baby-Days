@@ -102,7 +102,27 @@ footer {
 .css-164nlkn {
     display: none !important;
 }
+/* ===== 入力ボックスのデザイン変更 ===== */
 
+/* ニックネーム（テキスト入力）と誕生日（日付入力）の枠と背景 */
+div[data-testid="stTextInput"] div[data-baseweb="input"],
+div[data-testid="stDateInput"] div[data-baseweb="input"] {
+    background-color: #FFF5F7 !important; /* 背景色（薄いピンク） */
+    border: 2px solid #FFD1DC !important; /* 枠線の色（少し濃いピンク） */
+    border-radius: 10px !important; /* 角を少し丸くする */
+}
+
+/* 入力中の文字の色（見えやすいように濃いグレーに固定） */
+div[data-testid="stTextInput"] input,
+div[data-testid="stDateInput"] input {
+    color: #333333 !important;
+}
+
+/* フォーカス時（タップして入力している時）の枠線の色 */
+div[data-testid="stTextInput"] div[data-baseweb="input"]:focus-within,
+div[data-testid="stDateInput"] div[data-baseweb="input"]:focus-within {
+    border-color: #FFB6C1 !important; /* タップすると少し濃くなる */
+}
 </style>
 """, unsafe_allow_html=True)
 
