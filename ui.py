@@ -111,7 +111,7 @@ def render_header(title, subtitle, description):
 
 def render_result_card(name, events, footer_text):
     """シンプルでおしゃれな結果表示カード"""
-    card_title = f"{name}の記念日リスト" if name else "記念日リスト"
+    card_title = f"{name}の記念日リスト" if name else "記念日"
     
     events_html = ""
     for ev in events:
