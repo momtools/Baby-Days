@@ -56,7 +56,7 @@ def apply_css():
     .event { 
         display: flex; 
         justify-content: space-between; 
-        padding: 14px 0; 
+        padding: 10px 0; 
         font-size: 14px; 
         border-bottom: 1px dashed #F0F0F0; 
     }
