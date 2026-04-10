@@ -21,7 +21,7 @@ def apply_css():
     /* 画面幅を少し狭めて、よりWebサイトっぽく（中央寄せ） */
     .block-container { 
         padding-top: 3rem !important; 
-        padding-bottom: 4rem !important;
+        padding-bottom: 1rem !important;
         max-width: 600px !important;
     }
 
