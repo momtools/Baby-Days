@@ -45,7 +45,7 @@ def apply_css():
     /* 4. 結果カード */
     .card { 
         background-color: #FFFFFF !important; 
-        padding: 30px; 
+        padding: 20px; 
         border: 1px solid #EAEAEA; 
         border-radius: 8px; 
         margin-top: 20px; 
@@ -56,7 +56,7 @@ def apply_css():
     .event { 
         display: flex; 
         justify-content: space-between; 
-        padding: 10px 0; 
+        padding: 8px 0; 
         font-size: 14px; 
         border-bottom: 1px dashed #F0F0F0; 
     }
