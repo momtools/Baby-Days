@@ -87,23 +87,30 @@ def apply_css():
         background-color: transparent !important;
         color: #4A4A4A !important;
     }
-    /* 7. ラジオボタン（選択ドット）の色 */
-    /* 選択されている時の外枠と中のドットの色 */
-    div[data-testid="stRadio"] div[role="radiogroup"] div[aria-checked="true"] > div:first-child {
-        border-color: #D6A4A4 !important; /* 外枠の色 */
-        background-color: transparent !important; /* 外枠の中は透明に */
+    
+        /* 7. ラジオボタン（選択ドット）の色 */
+    
+    /* 選択されている時の外枠（円） */
+    div[data-testid="stRadio"] label[aria-checked="true"] > div:first-of-type {
+        border-color: #D6A4A4 !important;
     }
 
-    /* 中の小さなポチ（ドット）自体の色 */
-    div[data-testid="stRadio"] div[role="radiogroup"] div[aria-checked="true"] > div:first-child > div {
+    /* 選択されている時の中のポチ */
+    div[data-testid="stRadio"] label[aria-checked="true"] > div:first-of-type > div {
         background-color: #D6A4A4 !important;
     }
 
-    /* 選択されている方のテキストを少し強調する（分かりやすさアップ） */
-    div[data-testid="stRadio"] div[role="radiogroup"] div[aria-checked="true"] {
+    /* 選択されていない時の外枠も少し整える（任意） */
+    div[data-testid="stRadio"] label[aria-checked="false"] > div:first-of-type {
+        border-color: #E5E5E5 !important;
+    }
+
+    /* 選択中のテキストを太字にする（視認性アップ） */
+    div[data-testid="stRadio"] label[aria-checked="true"] div[data-testid="stMarkdownContainer"] p {
         font-weight: bold !important;
         color: #4A4A4A !important;
     }
+
 
     /* 【最後の手段】カレンダーアイコンの背景ブロックを強制的に透明化 */
     div[data-testid="stDateInput"] div[data-baseweb="base-input"] > div:last-child {
