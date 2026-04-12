@@ -87,6 +87,23 @@ def apply_css():
         background-color: transparent !important;
         color: #4A4A4A !important;
     }
+    /* 7. ラジオボタン（選択ドット）の色 */
+    /* 選択されている時の外枠と中のドットの色 */
+    div[data-testid="stRadio"] div[role="radiogroup"] div[aria-checked="true"] > div:first-child {
+        border-color: #D6A4A4 !important; /* 外枠の色 */
+        background-color: transparent !important; /* 外枠の中は透明に */
+    }
+
+    /* 中の小さなポチ（ドット）自体の色 */
+    div[data-testid="stRadio"] div[role="radiogroup"] div[aria-checked="true"] > div:first-child > div {
+        background-color: #D6A4A4 !important;
+    }
+
+    /* 選択されている方のテキストを少し強調する（分かりやすさアップ） */
+    div[data-testid="stRadio"] div[role="radiogroup"] div[aria-checked="true"] {
+        font-weight: bold !important;
+        color: #4A4A4A !important;
+    }
 
     /* 【最後の手段】カレンダーアイコンの背景ブロックを強制的に透明化 */
     div[data-testid="stDateInput"] div[data-baseweb="base-input"] > div:last-child {
