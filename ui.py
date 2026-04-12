@@ -90,10 +90,6 @@ def apply_css():
     
     /* 7. ラジオボタン（選択ドット）の色 */
     
-    /* ★最強・確実に効くやつ */
-    input[type="radio"]:checked {
-    accent-color: #D6A4A4;
-    }
     
     /* 選択されている時の外枠（円） */
     div[data-testid="stRadio"] label[aria-checked="true"] > div:first-of-type {
@@ -114,6 +110,11 @@ def apply_css():
     div[data-testid="stRadio"] label[aria-checked="true"] div[data-testid="stMarkdownContainer"] p {
         font-weight: bold !important;
         color: #4A4A4A !important;
+    }
+    
+    /* ★最強・確実に効くやつ */
+    input[type="radio"]:checked {
+    accent-color: #D6A4A4;
     }
 
 
